@@ -1,0 +1,60 @@
+#define IDI_ICON		100
+#define IDD_DIALOG		100
+#define IDC_VICTIM		100
+#define IDC_TROJAN		200
+#define IDC_OUTDIR		300
+#define IDC_LVICTIM		1000
+#define IDC_LTROJAN		2000
+#define IDC_LOUTDIR		3000
+#define IDC_WWW			4000
+#define IDC_INPECT		5000
+
+
+IDI_ICON ICON DISCARDABLE	"Syringe.ico"
+
+
+IDD_DIALOG DIALOG DISCARDABLE	0,0,208,72
+STYLE	WS_OVERLAPPEDWINDOW - WS_MAXIMIZEBOX - WS_THICKFRAME + WS_BORDER
+CAPTION "inPEct by Stas"
+FONT 8, "MS Sans Serif"
+BEGIN
+	LTEXT		"Victim:",		IDC_STATIC,	5,7,60,12
+	EDITTEXT	IDC_VICTIM,	66,5,118,12,	ES_AUTOHSCROLL
+	PUSHBUTTON	"...",		IDC_LVICTIM,	188,5,14,12
+
+	LTEXT		"Trojan:",		IDC_STATIC,	5,22,60,12
+	EDITTEXT	IDC_TROJAN,	66,20,118,12,	ES_AUTOHSCROLL
+	PUSHBUTTON	"...",		IDC_LTROJAN,	188,20,14,12
+
+	LTEXT		"Output Directory:",	IDC_STATIC,	5,37,60,12
+	EDITTEXT	IDC_OUTDIR,	66,35,118,12,	ES_AUTOHSCROLL
+	PUSHBUTTON	"...",		IDC_LOUTDIR,	188,35,14,12
+
+	PUSHBUTTON	"Visit inPEct on WWW",	IDC_WWW,	5,53,80,14
+	PUSHBUTTON	"inPEct!",	IDC_INPECT,	162,53,40,14
+END
+
+
+IDR_VERSION	VERSIONINFO	MOVEABLE IMPURE LOADONCALL DISCARDABLE
+  FILEVERSION	1,0,0,0
+  PRODUCTVERSION	1,0,0,0
+  FILEFLAGSMASK	VS_FFI_FILEFLAGSMASK
+  FILEFLAGS	0
+  FILEOS	VOS_DOS_WINDOWS32
+  FILETYPE	VFT_APP
+  FILESUBTYPE	0	// not used
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"	//Block: language ID = U.S. English, char set = Windows, Multilingual
+        BEGIN
+            VALUE	"Author",	"Stas", 0
+            VALUE	"CompanyName",	"SysD Destructive Labs", 0
+            VALUE	"LegalCopyright",	"©opyLeft by SysD Destructive Labs", 0
+            VALUE	"FileDescription",	"Inserts trojans in programs", 0
+            VALUE	"FileVersion",	"1.0", 0
+            VALUE	"OriginalFilename",	"inpect.exe", 0
+            VALUE       "ProductName",  "inPEct", 0
+        END
+    END
+END
