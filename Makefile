@@ -20,7 +20,7 @@ IMPORT=import32
 
 $(NAME).EXE: $(OBJS) $(DEF)
   brc32 -r $(NAME)
-  tlink32 /V4.0 /x /Tpe /aa /c $(LINKDEBUG) $(OBJS),$(NAME),, $(IMPORT), $(DEF), $(RES)
+  tlink32 /V4.0 /x /Tpe /aa /c $(LINKDEBUG) $(OBJS),$(NAME).exe,, $(IMPORT), $(DEF), $(RES)
 
 .ASM.OBJ:
   tasm32 $(TASMDEBUG) /ml /m2 $&.asm

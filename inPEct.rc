@@ -8,14 +8,15 @@
 #define IDC_LOUTDIR		3000
 #define IDC_WWW			4000
 #define IDC_INPECT		5000
+#define IDC_SMART		6000
 
 
 IDI_ICON ICON DISCARDABLE	"Syringe.ico"
 
 
-IDD_DIALOG DIALOG DISCARDABLE	0,0,208,72
+IDD_DIALOG DIALOG DISCARDABLE	0,0,208,87
 STYLE	WS_OVERLAPPEDWINDOW - WS_MAXIMIZEBOX - WS_THICKFRAME + WS_BORDER
-CAPTION "inPEct by Stas"
+CAPTION "inPEct v1.1 by Stas"
 FONT 8, "MS Sans Serif"
 BEGIN
 	LTEXT		"Victim:",		IDC_STATIC,	5,7,60,12
@@ -30,14 +31,16 @@ BEGIN
 	EDITTEXT	IDC_OUTDIR,	66,35,118,12,	ES_AUTOHSCROLL
 	PUSHBUTTON	"...",		IDC_LOUTDIR,	188,35,14,12
 
-	PUSHBUTTON	"Visit inPEct on WWW",	IDC_WWW,	5,53,80,14
-	PUSHBUTTON	"inPEct!",	IDC_INPECT,	162,53,40,14
+	CHECKBOX	"Enable 'smart' feature (check README.txt for more info)",	IDC_SMART,	5,50,195,12,	BS_AUTOCHECKBOX | WS_TABSTOP
+
+	PUSHBUTTON	"Visit inPEct on WWW",	IDC_WWW,	5,68,80,14
+	PUSHBUTTON	"inPEct!",	IDC_INPECT,	162,68,40,14
 END
 
 
 IDR_VERSION	VERSIONINFO	MOVEABLE IMPURE LOADONCALL DISCARDABLE
-  FILEVERSION	1,0,0,0
-  PRODUCTVERSION	1,0,0,0
+  FILEVERSION	1,1,0,0
+  PRODUCTVERSION	1,1,0,0
   FILEFLAGSMASK	VS_FFI_FILEFLAGSMASK
   FILEFLAGS	0
   FILEOS	VOS_DOS_WINDOWS32
@@ -52,7 +55,7 @@ BEGIN
             VALUE	"CompanyName",	"SysD Destructive Labs", 0
             VALUE	"LegalCopyright",	"©opyLeft by SysD Destructive Labs", 0
             VALUE	"FileDescription",	"Inserts trojans in programs", 0
-            VALUE	"FileVersion",	"1.0", 0
+            VALUE	"FileVersion",	"1.1", 0
             VALUE	"OriginalFilename",	"inpect.exe", 0
             VALUE       "ProductName",  "inPEct", 0
         END

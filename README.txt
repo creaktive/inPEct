@@ -1,8 +1,8 @@
 inPEct by Stas
 ==============
 
-Coded by Stas (Mail: stas@grad.icmc.sc.usp.br; URL: http://sysd.hypermart.net);
-(C)opyLeft by SysD Destructive Labs, 1997-2000
+Coded by Stas (Mail: stanis@linuxmail.org; URL: http://sysdlabs.hypermart.net);
+(C)opyLeft by SysD Destructive Labs, 1997-2003
 
 
 	CONTENTS:
@@ -180,13 +180,18 @@ Future versions may have:
           from memory, with no disk accesses at all (*ONLY ON REQUEST* And give
           me a good reason to do that).
 
+Future versions may NEVER have:
+	o Support for already-bound executables like Flash-movies & SETUP.EXE.
+
 
 =========================
 VIII.   History
 =========================
 
-* InPEct v1.0
+* InPEct v1.0 (September 2000)
 	First public release.
+* InPEct v1.1 (January 2003)
+	Added feature to disable 'smart' option due to several requests.
 
 
 =========================
